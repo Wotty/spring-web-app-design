@@ -3,22 +3,34 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<title>Items</title>
+<%@include file="header.jsp"%>
+<title>Basket</title>
 </head>
 <body>
-	<h2>Items</h2>
+	<h2>Basket</h2>
 	<TABLE>
-		<c:forEach var="eachItem" items="${listOfItems}">
+		<thead>
+			<tr>
+				<th>Item ID</th>
+				<th>Item Name</th>
+				<th>Description</th>
+				<th>Quantity</th>
+				<th>Remove</th>
+			</tr>
+		</thead>
+		<c:forEach var="eachItem" items="${basket}">
 			<TR>
-				<TD><c:out value="${eachItem.itemID}" /></TD>
-				<TD><c:out value="${eachItem.itemName}" /></TD>
-				<TD><c:out value="${eachItem.description}" /></TD>
-				<TD><sf:form action="addItemToBasket/${eachItem.itemID}">
-						<input type="submit" name="commit" value="add" />
+				<TD><c:out value="${eachItem.key.itemID}" /></TD>
+				<TD><c:out value="${eachItem.key.itemName}" /></TD>
+				<TD><c:out value="${eachItem.key.description}" /></TD>
+				<TD><c:out value="${eachItem.value}" /></TD>
+				<TD><sf:form
+						action="${pageContext.request.contextPath}/removeItemFromBasket/${eachItem.key.itemID}">
+						<input type="submit" name="commit" value="remove" />
 					</sf:form></TD>
 			</TR>
 		</c:forEach>
 	</TABLE>
-	<a href="home">Return to menu</a>
+	<a href="${pageContext.request.contextPath}/payForOrder">Order</a>
 </body>
 </html>

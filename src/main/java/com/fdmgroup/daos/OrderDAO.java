@@ -19,7 +19,7 @@ public class OrderDAO {
 	}
 	public List<Order> listOrders(){
 
-		TypedQuery<Order> queryOrders = entityManager.createQuery("SELECT s from Order s",Order.class);
+		TypedQuery<Order> queryOrders = entityManager.createQuery("SELECT o from order_table o",Order.class);
 		listOrders = queryOrders.getResultList();
 		return listOrders;
 	}

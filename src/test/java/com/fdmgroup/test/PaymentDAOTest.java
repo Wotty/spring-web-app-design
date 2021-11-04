@@ -41,7 +41,7 @@ public class PaymentDAOTest {
 		PaymentDAO paymentDAO = new PaymentDAO();
 		paymentDAO.setEntityManager(entityManager);
 
-		List<Payment> listPayments = paymentDAO.listPayments();
+		List<Payment> listPayments = paymentDAO.listPayments("Will");
 		int listSize = listPayments.size();
 		assertEquals(0,listSize);
 	}
@@ -54,7 +54,7 @@ public class PaymentDAOTest {
 		payment.setCardCSV("234");
 		paymentDAO.addPayment(payment);
 
-		List<Payment> listPayments = paymentDAO.listPayments();
+		List<Payment> listPayments = paymentDAO.listPayments("Will");
 		int listSize = listPayments.size();
 		assertEquals(1,listSize);
 	}
@@ -68,7 +68,7 @@ public class PaymentDAOTest {
 		payment.setCardCSV("234");
 		paymentDAO.addPayment(payment);
 
-		Payment paymentInDB = paymentDAO.listPayments().get(0);
+		Payment paymentInDB = paymentDAO.listPayments("Will").get(0);
 		int paymentID = paymentInDB.getPaymentID();
 		assertEquals(payment.getPaymentID(), paymentID);
 	}
@@ -84,7 +84,7 @@ public class PaymentDAOTest {
 
 		paymentDAO.removePayment(payment.getPaymentID());
 
-		List<Payment> listPayments = paymentDAO.listPayments();
+		List<Payment> listPayments = paymentDAO.listPayments("Will");
 		int listSize = listPayments.size();
 		assertEquals(0,listSize);
 	}
@@ -95,7 +95,7 @@ public class PaymentDAOTest {
 
 		Payment payment = new Payment();
 		payment.setCardCSV("234");
-		payment.setPaymentDate(12345253456L);
+		payment.setPaymentDate("01-01-2021");
 		paymentDAO.addPayment(payment);
 
 		Date paymentDate = new Date(312345253456L);
@@ -114,12 +114,11 @@ public class PaymentDAOTest {
 
 		Payment payment = new Payment();
 		payment.setCardCSV("234");
-		long timestamp = 1532576392010L;
-		payment.setPaymentDate(timestamp);
+		payment.setPaymentDate("01-01-2020");
 		paymentDAO.addPayment(payment);
 		paymentDAO.removeAllPayments();
 
-		List<Payment> listPayments = paymentDAO.listPayments();
+		List<Payment> listPayments = paymentDAO.listPayments("Will");
 		int listSize = listPayments.size();
 		assertEquals(0,listSize);
 	}
@@ -133,7 +132,7 @@ public class PaymentDAOTest {
 		paymentDAO.addPayment(payment);
 
 		paymentDAO.removePayment(24);
-		List<Payment> listPayments = paymentDAO.listPayments();
+		List<Payment> listPayments = paymentDAO.listPayments("Will");
 		int listSize = listPayments.size();
 		assertEquals(1,listSize);
 	}
@@ -150,7 +149,7 @@ public class PaymentDAOTest {
 		copyPayment.setCardCSV("234");
 		paymentDAO.addPayment(copyPayment);
 
-		List<Payment> listPayments = paymentDAO.listPayments();
+		List<Payment> listPayments = paymentDAO.listPayments("Will");
 		Payment checkPayment = listPayments.get(0);
 		assertEquals(payment,checkPayment);
 	}

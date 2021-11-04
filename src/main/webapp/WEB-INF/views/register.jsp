@@ -24,9 +24,7 @@
 		<br>
 
 ${requestScope.message}<br>
-		<button name="submit" value="submit" type="submit">Submit</button>
+		<input type="submit" name="commit" value="submit" />
 	</sf:form>
-		<a href="login">Login</a>
-	
 </body>
 </html>

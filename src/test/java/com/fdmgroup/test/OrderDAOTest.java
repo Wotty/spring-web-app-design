@@ -96,7 +96,7 @@ public class OrderDAOTest {
 
 		Order order = new Order();
 		order.setOrderID(1);
-		order.setOrderDate(12345253456L);
+		order.setOrderDate("10-10-2021");
 		orderDAO.addOrder(order);
 
 		Date orderDate = new Date(312345253456L);
@@ -115,8 +115,7 @@ public class OrderDAOTest {
 
 		Order order = new Order();
 		order.setOrderID(13);
-		long timestamp = 1532576392010L;
-		order.setOrderDate(timestamp);
+		order.setOrderDate("10-10-2021");
 		orderDAO.addOrder(order);
 		orderDAO.removeAllOrders();
 

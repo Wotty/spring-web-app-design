@@ -1,6 +1,7 @@
 package com.fdmgroup.daos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,8 +20,10 @@ public class OrderDetailsDAO {
 	public void setEntityManager(EntityManager entityManager)	{  
 		this.entityManager = entityManager;
 	}
-	public List<OrderDetails> listOrderDetails(){
-		TypedQuery<OrderDetails> queryOrderDetails = entityManager.createQuery("SELECT s from OrderDetails s",OrderDetails.class);
+	public List<OrderDetails> listOrderDetails(String user){
+		TypedQuery<OrderDetails> queryOrderDetails = entityManager.createQuery("SELECT od FROM OrderDetails AS od "
+				+ "WHERE od.order.siteUser.username=:username",OrderDetails.class);
+		queryOrderDetails.setParameter("username", user);
 		listOrderDetails = queryOrderDetails.getResultList();
 		return listOrderDetails;
 	}
@@ -43,6 +46,29 @@ public class OrderDetailsDAO {
 
 		}
 	}
+	public void addAllOrderDetails(HashMap<Item,Integer> basket,Order order) {
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+
+		for(var entry: basket.entrySet()) {
+			Item item = (Item)	entry.getKey();
+			int quantity = entry.getValue();
+			OrderDetails orderDetail = new OrderDetails();
+			orderDetail.setItem(item);
+			orderDetail.setOrder(order);
+			OrderDetails orderDetailInDB = entityManager.find(OrderDetails.class,101);
+			if(orderDetailInDB==null) {
+				orderDetail.setOrderQty(quantity);
+				entityManager.persist(orderDetail);
+			}else {
+				quantity = orderDetailInDB.getOrderQty();
+				orderDetailInDB.setOrderQty(quantity+1);
+				entityManager.merge(orderDetailInDB);
+			}
+		}
+		entityTransaction.commit();
+	}
+
 	public List<OrderDetails> getOrderDetails(int orderID) {
 
 		TypedQuery<OrderDetails> queryOrderDetails = entityManager.createQuery("select o from OrderDetails o where o.order.orderID=:orderID",OrderDetails.class);
