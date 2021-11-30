@@ -42,7 +42,7 @@ public class OrderDetailsDAOTest {
 		OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAO();
 		orderDetailsDAO.setEntityManager(entityManager);
 
-		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails("Will");
+		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails();
 		int listSize = listOrderDetails.size();
 		assertEquals(0,listSize);
 	}
@@ -63,7 +63,7 @@ public class OrderDetailsDAOTest {
 
 		orderDetailsDAO.addOrderDetails(orderDetails);
 
-		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails("Will");
+		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails();
 		int listSize = listOrderDetails.size();
 		assertEquals(1,listSize);
 	}
@@ -83,7 +83,7 @@ public class OrderDetailsDAOTest {
 		orderDetails.setOrderQty(23);
 		orderDetailsDAO.addOrderDetails(orderDetails);
 
-		OrderDetails orderDetailsInDB = orderDetailsDAO.listOrderDetails("Will").get(0);
+		OrderDetails orderDetailsInDB = orderDetailsDAO.listOrderDetails().get(0);
 		int orderDetailsID = orderDetailsInDB.getOrder().getOrderID();
 		assertEquals(orderDetails.getOrder().getOrderID(), orderDetailsID);
 	}
@@ -105,7 +105,7 @@ public class OrderDetailsDAOTest {
 
 		orderDetailsDAO.removeOrderDetails(orderDetails.getOrder().getOrderID());
 
-		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails("Will");
+		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails();
 		int listSize = listOrderDetails.size();
 		assertEquals(0,listSize);
 	}
@@ -149,7 +149,7 @@ public class OrderDetailsDAOTest {
 		orderDetailsDAO.addOrderDetails(orderDetails);
 		orderDetailsDAO.removeAllOrderDetails();
 
-		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails("Will");
+		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails();
 		int listSize = listOrderDetails.size();
 		assertEquals(0,listSize);
 	}
@@ -169,7 +169,7 @@ public class OrderDetailsDAOTest {
 		orderDetailsDAO.addOrderDetails(orderDetails);
 
 		orderDetailsDAO.removeOrderDetails(24);
-		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails("Will");
+		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails();
 		int listSize = listOrderDetails.size();
 		assertEquals(1,listSize);
 	}
@@ -202,7 +202,7 @@ public class OrderDetailsDAOTest {
 		orderDetailsDAO.addOrderDetails(orderDetails);
 		orderDetailsDAO.addOrderDetails(copyOrderDetails);
 
-		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails("Will");
+		List<OrderDetails> listOrderDetails = orderDetailsDAO.listOrderDetails();
 		OrderDetails checkOrderDetails = listOrderDetails.get(0);
 
 		assertEquals(orderDetails.toString(),checkOrderDetails.toString());

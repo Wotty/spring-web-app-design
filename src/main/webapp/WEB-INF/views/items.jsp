@@ -3,7 +3,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<%@include file="header.jsp"%>
 <title>Items</title>
 </head>
 <body>
@@ -14,12 +13,12 @@
 				<TD><c:out value="${eachItem.itemID}" /></TD>
 				<TD><c:out value="${eachItem.itemName}" /></TD>
 				<TD><c:out value="${eachItem.description}" /></TD>
-				<TD><sf:form
-						action='${pageContext.request.contextPath}/addItemToBasket/${eachItem.itemID}'>
+				<TD><sf:form action="addItemToBasket/${eachItem.itemID}">
 						<input type="submit" name="commit" value="add" />
 					</sf:form></TD>
 			</TR>
 		</c:forEach>
 	</TABLE>
+	<a href="home">Return to menu</a>
 </body>
 </html>

@@ -17,11 +17,10 @@ public class PaymentDAO {
 	public void setEntityManager(EntityManager entityManager) {  
 		this.entityManager = entityManager;
 	}
-	public List<Payment> listPayments(String user){
-		TypedQuery<Payment> queryPayments = entityManager.createQuery("SELECT p FROM Payment p where p.siteUser.username=:username",Payment.class);
-		queryPayments.setParameter("username", user);
+	public List<Payment> listPayments(){
+
+		TypedQuery<Payment> queryPayments = entityManager.createQuery("SELECT s from Payment s",Payment.class);
 		listPayments = queryPayments.getResultList();
-		
 		return listPayments;
 	}
 	public void addPayment(Payment sitePayment) {

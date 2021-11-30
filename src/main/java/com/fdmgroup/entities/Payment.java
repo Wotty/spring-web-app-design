@@ -29,8 +29,8 @@ public class Payment {
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	public void setPaymentDate(String timestamp) {
-		this.paymentDate = Date.valueOf(timestamp);
+	public void setPaymentDate(long timestamp) {
+		this.paymentDate = new Date(timestamp);
 	}
 	public String getCardNumber() {
 		return cardNumber;
@@ -49,9 +49,6 @@ public class Payment {
 	}
 	public void setCardExpiry(Date cardExpiry) {
 		this.cardExpiry = cardExpiry;
-	}
-	public void setCardExpiry(String cardExpiry) {
-		this.cardExpiry = Date.valueOf(cardExpiry);
 	}
 	public SiteUser getSiteUser() {
 		return siteUser;
