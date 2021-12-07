@@ -49,7 +49,6 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
